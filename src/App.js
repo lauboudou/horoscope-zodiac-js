@@ -53,7 +53,7 @@ function App() {
         <div className="col-md-6">
             <div className="card">
               <div className="card-body">
-                <h5 class="card-title">Chinese zodiac</h5>
+                <h5 className="card-title">Chinese zodiac</h5>
                 <div className="form-group">
                   <label htmlFor="name">Year</label>
                   <input type="number" aria-describedby="numberHelp" className="form-control" id="name" value={year} onChange={e => setYear(e.target.value)} />
@@ -65,8 +65,8 @@ function App() {
           </div>
           <div className="col-md-6">
             <div className="card card-3d">
-              <div class="card-body">
-                <h5 clasName="card-title">{zodiac}</h5>
+              <div className="card-body">
+                <h5 className="card-title">{zodiac}</h5>
                 <img src={zodiacImage} alt='zodiac animal' />
               </div>
             </div>
@@ -83,15 +83,12 @@ function App() {
                 <h5 className="card-title">Astrologie Zodiac</h5>
                 <div className="form-group">
                   <label htmlFor="name">Jour
-                    <input type="number" aria-describedby="numberHelp" className="form-control" id="jour"
-                       value={day} onChange={(e) => setDay(e.target.value)} min="1" max="31" />
+                    <input type="number" aria-describedby="numberHelp" className="form-control" id="jour" value={day} onChange={(e) => setDay(e.target.value)} min="1" max="31" />
                    </label>
                    <td/>
                    <label htmlFor="name">
                     Mois
-                     <input
-                       type="number" aria-describedby="numberHelp" className="form-control" id="mois"
-                       value={month} onChange={(e) => setMonth(e.target.value)} min="1" max="12"/>
+                     <input type="number" aria-describedby="numberHelp" className="form-control" id="mois" value={month} onChange={(e) => setMonth(e.target.value)} min="1" max="12"/>
                    </label>
                 </div>            
                 <button onClick={handleCheckZodiac} className="btn btn-primary">Vérifier le signe</button>

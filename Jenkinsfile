@@ -3,32 +3,32 @@ pipeline {
     agent {
         label 'agent_node'
     }
-    /*environment{
+    environment{
         DOCKER_HUB_PAT = credentials('docker_hub_pat')
-    }*/
+    }
     stages {
-        stage('clone') {
+        stage('Clone') {
             steps {
                 git branch: 'main', credentialsId: 'zodiacJS-private-repo', url: 'https://github.com/lauboudou/zodiacJS.git'
             }
         }
-        stage('build') {
+        stage('Build') {
             steps {
                 sh 'npm install && npm run build'
             }
         }
-        stage('test') {
+        stage('Test') {
             steps {
                 sh 'npm run test'
             }
         }
-        /*stage('delivery') {
+        stage('Delivery') {
             steps {
                 sh 'docker login -u dlaubo -p ${DOCKER_HUB_PAT}'
-                sh 'docker build . -t dlaubo/zodiacjs:${BUILD_ID}'
-                sh 'docker push dlaubo/zodiacjs:${BUILD_ID}'
+                sh 'docker build . -t dlaubo/horoscope-zodiac-js:${BUILD_ID}'
+                sh 'docker push dlaubo/horoscope-zodiac-js:${BUILD_ID}'
             }
-        }*/
+        }
     }
     post {
       success { 
