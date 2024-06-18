@@ -86,9 +86,8 @@ function App() {
                     <input type="number" aria-describedby="numberHelp" className="form-control" id="jour" value={day} onChange={(e) => setDay(e.target.value)} min="1" max="31" />
                    </label>
                    <td/>
-                   <label htmlFor="name">
-                    Mois
-                     <input type="number" aria-describedby="numberHelp" className="form-control" id="mois" value={month} onChange={(e) => setMonth(e.target.value)} min="1" max="12"/>
+                   <label htmlFor="name">Mois
+                    <input type="number" aria-describedby="numberHelp" className="form-control" id="mois" value={month} onChange={(e) => setMonth(e.target.value)} min="1" max="12"/>
                    </label>
                 </div>            
                 <button onClick={handleCheckZodiac} className="btn btn-primary">Vérifier le signe</button>
