@@ -1,15 +1,15 @@
-
 pipeline {
     agent {
-        label 'agent_node'
+        label 'agent_reactjs_node'
     }
+    
     environment{
-        DOCKER_HUB_PAT = credentials('docker_hub_pat')
+        DOCKER_CREDENTIALS_ID = 'dockerhub_credentials'
     }
     stages {
         stage('Clone') {
             steps {
-                git branch: 'main', credentialsId: 'zodiacJS-private-repo', url: 'https://github.com/lauboudou/zodiacJS.git'
+                git branch: 'main', url: 'https://github.com/lauboudou/horoscope-zodiac-js.git'
             }
         }
         stage('Build') {
@@ -22,11 +22,35 @@ pipeline {
                 sh 'npm run test'
             }
         }
+        stage('Scan'){
+            steps {
+                 withSonarQubeEnv(installationName: 'sonarqube-server'){
+                    sh '''
+                      sonar-scanner \
+                      -Dsonar.projectKey=Sonar-horoscope-zodiac-js \
+                      -Dsonar.sources=. \
+                      -Dsonar.host.url=http://172.18.0.2:9000 \
+                      -Dsonar.token=sqp_d24cfb91332ef4caad3522ca08b7ed0fd995a5aa
+
+
+                    '''
+                }
+            }
+        }
+        stage ('Quality Gate'){
+          steps {
+                 timeout(time:4, unit: 'MINUTES'){ waitForQualityGate abortPipeline: true }
+          }
+        }
         stage('Delivery') {
             steps {
-                sh 'docker login -u dlaubo -p ${DOCKER_HUB_PAT}'
-                sh 'docker build . -t dlaubo/horoscope-zodiac-js:${BUILD_ID}'
-                sh 'docker push dlaubo/horoscope-zodiac-js:${BUILD_ID}'
+                script {
+                  withCredentials([usernamePassword(credentialsId: "${env.DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASS')]) {
+                        sh 'docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASS'
+                        sh 'docker build . -t dlaubo/horoscope-zodiac-js:${BUILD_ID}'
+                        sh 'docker push dlaubo/horoscope-zodiac-js:${BUILD_ID}'
+                  }
+                }
             }
         }
     }
@@ -40,3 +64,4 @@ pipeline {
       } 
     }
 }
+    
