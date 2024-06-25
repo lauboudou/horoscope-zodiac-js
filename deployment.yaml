@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: horoscope-zodiac-js
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: horoscope-zodiac-js
+  template:
+    metadata:
+      labels:
+        app: horoscope-zodiac-js
+    spec:
+      containers:
+        - name: horoscope-zodiac-js
+          image: horoscope-zodiac-js:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
