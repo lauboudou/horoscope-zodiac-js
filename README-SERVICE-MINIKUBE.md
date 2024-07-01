@@ -38,3 +38,29 @@ To access your application, you need to get the URL of the service:
 minikube service horoscope-zodiac-js-service --url
 
 This command will return a URL that you can open in your browser to see your deployed React.js application.
+
+# Deploy horoscope-ingress.yaml and activate ingress controller 
+
+first add this configuration as admin in 'C:\Windows\System32\drivers\etc\hosts' file
+127.0.0.1 site.horoscope
+
+# Deploy horoscope ingress
+kubectl apply -f horoscope-ingress.yaml
+
+# Enable ingress
+minikube addons enable ingress
+
+# Display available ingress
+kubectl get ingress
+
+![alt text](images/image1.png)
+
+# Start horoscope ingress
+minikube tunnel
+
+=== Check horoscope application accessibility on browser
+==============================================================================================
+
+/site.horoscope
+
+![alt text](images/image1.png)
