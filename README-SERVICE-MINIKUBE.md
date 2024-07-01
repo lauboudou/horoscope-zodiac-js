@@ -42,6 +42,7 @@ This command will return a URL that you can open in your browser to see your dep
 # Deploy horoscope-ingress.yaml and activate ingress controller 
 
 first add this configuration as admin in 'C:\Windows\System32\drivers\etc\hosts' file
+
 127.0.0.1 site.horoscope
 
 # Deploy horoscope ingress
