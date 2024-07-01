@@ -53,7 +53,7 @@ minikube addons enable ingress
 # Display available ingress
 kubectl get ingress
 
-![alt text](images/image1.png)
+![alt text](src/images/image1.png)
 
 # Start horoscope ingress
 minikube tunnel
@@ -63,4 +63,4 @@ minikube tunnel
 
 /site.horoscope
 
-![alt text](images/image1.png)
+![alt text](src/images/image2.png)
